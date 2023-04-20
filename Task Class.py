@@ -10,7 +10,7 @@ class Task:
         Args:
             course: (str) the name of the course the task belongs to
             title: (str) title of the tast
-            time: (str) amount of time the task is estimated to take
+            time: (int) amount of time the task is estimated to take in hours
             priority: (int) urgency of the task on a scale from 1-5 (1 is lowest priority, 5 is highest)
             duedate: (str) when the task is due, formatted as MM/DD"""
 
@@ -19,6 +19,10 @@ class Task:
         self.time = time
         self.priority = priority
         self.duedate = duedate
+
+    def __repr__(self):
+        rep = "Task: " + self.title
+        return rep
 
     def get_course(self):
         """Returns title of the course the task belongs to"""
@@ -39,3 +43,10 @@ class Task:
     def get_duedate(self):
         """Returns the task's due date"""
         return self.duedate
+
+"""task = Task("Data Structures", "Zybooks", 1, 3, "5/3")
+print(task.get_course())
+print(task.get_title())
+print(task.get_time())
+print(task.get_priority())
+print(task.get_duedate())"""
