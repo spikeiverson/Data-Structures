@@ -50,3 +50,35 @@ print(task.get_title())
 print(task.get_time())
 print(task.get_priority())
 print(task.get_duedate())"""
+
+
+
+
+
+def read_Task(f):
+    """Reads the next task from the file, returning None at the end.
+    Args:
+        f (file handle)
+    Returns:
+        Task or None
+    """
+    course = f.readline().rstrip()
+
+    title = f.readline().rstrip()
+
+    time = f.readline().rstrip()
+    if time == "":
+        return None
+    priority = f.redline().rstrip()
+    if priority == "":
+        return None
+    duedate = f.redline().rstrip()
+    
+    f.readline()
+
+    return Task(course, title, time, priority, duedate)
+
+
+
+
+
