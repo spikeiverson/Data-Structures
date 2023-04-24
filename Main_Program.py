@@ -52,6 +52,17 @@ def main():
 
     print(task_list)
 
+def sort_course():
+    pass
+
+def sort_duedate():
+    pass
+
+def sort_time():
+    pass
+
+def sort_priority():
+    pass
 
 
 
