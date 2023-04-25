@@ -53,6 +53,8 @@ def main():
     print(task_list)
     print(sort_time_descending())
     print(sort_time_ascending())
+    print(sort_priority_descending())
+    print(sort_priority_ascending())
 
 def sort_course():
     pass
@@ -64,14 +66,17 @@ def sort_time_descending():
     task_list.sort(key=lambda x: x.time)
     return task_list
 
-
 def sort_time_ascending():
     task_list.sort(key=lambda x: x.time, reverse = True)
     return task_list
     
+def sort_priority_descending():
+    task_list.sort(key=lambda x: x.priority)
+    return task_list
 
-def sort_priority():
-    pass
+def sort_priority_ascending():
+    task_list.sort(key=lambda x: x.priority, reverse = True)
+    return task_list
 
 
 
