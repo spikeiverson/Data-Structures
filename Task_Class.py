@@ -20,7 +20,7 @@ class Task:
 
     def __repr__(self):
         rep = "Task: " + self.title
-        return rep
+        return rep        
 
     def get_course(self):
         """Returns title of the course the task belongs to"""
@@ -64,17 +64,17 @@ def read_Task(f):
 
     title = f.readline().rstrip()
 
+    duedate = f.readline().rstrip()
+
     time = f.readline().rstrip()
     if time == "":
         return None
     priority = f.readline().rstrip()
     if priority == "":
         return None
-    duedate = f.readline().rstrip()
     
-    f.readline()
 
-    return Task(course, title, time, priority, duedate)
+    return Task(course, title, duedate, time, priority)
 
 
 

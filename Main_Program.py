@@ -1,8 +1,8 @@
 from Task_Class import Task, read_Task
 
-def main():
-    task_list = []
+task_list = []
 
+def main():
     with open("TaskText") as f:
             finished = False
             while not finished:
@@ -51,6 +51,8 @@ def main():
 
 
     print(task_list)
+    print(sort_time_descending())
+    print(sort_time_ascending())
 
 def sort_course():
     pass
@@ -58,8 +60,15 @@ def sort_course():
 def sort_duedate():
     pass
 
-def sort_time():
-    pass
+def sort_time_descending():
+    task_list.sort(key=lambda x: x.time)
+    return task_list
+
+
+def sort_time_ascending():
+    task_list.sort(key=lambda x: x.time, reverse = True)
+    return task_list
+    
 
 def sort_priority():
     pass
