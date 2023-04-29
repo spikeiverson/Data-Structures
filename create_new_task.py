@@ -20,9 +20,9 @@ def create():
     if int(input_priority) > 5 or (input_priority) < 1:
         error_label_2.grid(row=7, column=0)
         return
-    time = time_entry.get()
+    input_time = time_entry.get()
     tk.Label(text="Task created!").grid(row=7, column=1)
-    return input_title, input_course, input_due_date, input_priority, time
+    return input_title, input_course, input_due_date, input_priority, input_time
 
 new_task = tk.Tk()
 new_task.title("Create New Task")
