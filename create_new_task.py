@@ -1,5 +1,8 @@
 import tkinter as tk
 from tkinter import *
+from Task_Class import Task, read_Task
+from Main_Program import task_list
+
 
 def create():
     error_label = tk.Label(text='Fill out all fields marked with *')
@@ -22,7 +25,21 @@ def create():
         return
     input_time = time_entry.get()
     tk.Label(text="Task created!").grid(row=7, column=1)
-    return input_title, input_course, input_due_date, input_priority, input_time
+    new_task = Task(input_course, input_title, input_due_date, input_time, input_priority)
+    task_list.append(new_task)
+
+    filename = "TaskText"
+    with open(filename, "a") as f:
+        f.write(input_course)
+        f.write("\n")
+        f.write(input_title)
+        f.write("\n")
+        f.write(input_due_date)
+        f.write("\n")
+        f.write(input_time)
+        f.write("\n")
+        f.write(input_priority)
+        f.write("\n")
 
 new_task = tk.Tk()
 new_task.title("Create New Task")
