@@ -1,8 +1,6 @@
 import tkinter as tk
 from tkinter import *
-from Task_Class import Task, read_Task
-from Main_Program import task_list
-
+from tkcalendar import Calendar
 
 def create():
     error_label = tk.Label(text='Fill out all fields marked with *')
@@ -15,7 +13,7 @@ def create():
     if input_course == '':
         error_label.grid(row=7, column=0)
         return
-    input_due_date = due_date_entry.get()
+    input_due_date = due_date_entry.get_date()
     if input_due_date == '':
         error_label.grid(row=7, column=0)
         return
@@ -25,21 +23,7 @@ def create():
         return
     input_time = time_entry.get()
     tk.Label(text="Task created!").grid(row=7, column=1)
-    new_task = Task(input_course, input_title, input_due_date, input_time, input_priority)
-    task_list.append(new_task)
-
-    filename = "TaskText"
-    with open(filename, "a") as f:
-        f.write(input_course)
-        f.write("\n")
-        f.write(input_title)
-        f.write("\n")
-        f.write(input_due_date)
-        f.write("\n")
-        f.write(input_time)
-        f.write("\n")
-        f.write(input_priority)
-        f.write("\n")
+    return input_title, input_course, input_due_date, input_priority, input_time
 
 new_task = tk.Tk()
 new_task.title("Create New Task")
@@ -59,10 +43,10 @@ course_entry = tk.Entry(new_task)
 course_entry.grid(row=2, column=1)
 
 #due_date
-due_date_label = tk.Label(new_task, text="Due date* (YYYY/MM/DD):")
+due_date_label = tk.Label(new_task, text="Due date*")
 due_date_label.grid(row=3, column=0)
 
-due_date_entry = tk.Entry(new_task)
+due_date_entry = Calendar(new_task, selectmode='day', year=2023, month=5, day=1)
 due_date_entry.grid(row=3, column=1)
 
 #priority
