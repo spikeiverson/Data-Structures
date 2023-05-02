@@ -1,4 +1,7 @@
-from tkinter import *
+"""from tkinter import *
+from Task_Class import Task, read_Task
+from Main_Program import main_read
+
 
 root = Tk()
 
@@ -14,4 +17,6 @@ prioritylabel.grid(row = 0, column = 2)
 timelabel.grid(row = 0, column = 3)
 duelabel.grid(row = 0, column = 4)
 
-root.mainloop()
+
+root.after(1, main_read)
+root.mainloop()"""

@@ -42,13 +42,6 @@ class Task:
         """Returns the task's due date"""
         return self.duedate
 
-"""task = Task("Data Structures", "Zybooks", 1, 3, "5/3")
-print(task.get_course())
-print(task.get_title())
-print(task.get_time())
-print(task.get_priority())
-print(task.get_duedate())"""
-
 
 
 

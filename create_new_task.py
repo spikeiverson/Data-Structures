@@ -1,10 +1,13 @@
 import tkinter as tk
 from tkinter import *
 from tkcalendar import Calendar
+from Task_Class import Task, read_Task
+from Main_Program import task_list, main_read
+
 
 def create():
-    error_label = tk.Label(text='Fill out all fields marked with *', bg='#90EE90')
-    error_label_2 = tk.Label(text='Fill out all fields correctly', bg='#90EE90')
+    error_label = tk.Label(text='Fill out all fields marked with *')
+    error_label_2 = tk.Label(text='Fill out all fields correctly')
     input_title = title_entry.get()
     if input_title == '':
         error_label.grid(row=7, column=0)
@@ -13,18 +16,60 @@ def create():
     if input_course == '':
         error_label.grid(row=7, column=0)
         return
-    input_due_date = due_date_entry.get_date()
+    input_due_date = due_date_entry.get()
+    if input_due_date == '':
+        error_label.grid(row=7, column=0)
+        return
     input_priority = priority_entry.get()
-    if input_priority != '':
-        if input_priority.isnumeric() == False:
-            error_label_2.grid(row=7, column=0)
-            return
-        elif int(input_priority) > 5 or int(input_priority) < 1:
-            error_label_2.grid(row=7, column=0)
-            return
+    if int(input_priority) > 5 or int(input_priority) < 1:
+        error_label_2.grid(row=7, column=0)
+        return
     input_time = time_entry.get()
     tk.Label(text="Task created!").grid(row=7, column=1)
-    return input_title, input_course, input_due_date, input_priority, input_time
+    new_task = Task(input_course, input_title, input_due_date, input_time, input_priority)
+    task_list.append(new_task)
+
+    filename = "TaskText"
+    with open(filename, "a") as f:
+        f.write(input_course)
+        f.write("\n")
+        f.write(input_title)
+        f.write("\n")
+        f.write(input_due_date)
+        f.write("\n")
+        if input_time == "":
+            f.write("~")
+        else:
+            f.write(input_time)
+        f.write("\n")
+        if input_priority == "":
+            f.write("~")
+        else:
+            f.write(input_priority)
+        f.write("\n")
+
+
+root = Tk()
+
+titlelabel = Label(root, text = "Title")
+courselabel = Label(root, text = "Course")
+prioritylabel = Label(root, text = "Priority")
+timelabel = Label(root, text = "Time")
+duelabel = Label(root, text = "Due Date")
+
+titlelabel.grid(row = 0, column = 0)
+courselabel.grid(row = 0, column = 1)
+prioritylabel.grid(row = 0, column = 2)
+timelabel.grid(row = 0, column = 3)
+duelabel.grid(row = 0, column = 4)
+
+
+root.after(1, main_read)
+root.mainloop()
+
+
+
+
 
 new_task = tk.Tk()
 new_task.title("Create New Task")
@@ -68,4 +113,7 @@ time_entry.grid(row=4, column=1, sticky='ew')
 create_button = tk.Button(new_task, text="Create", command=create, bg='green', fg='white')
 create_button.grid(row=6, column=1)
 
+
 new_task.mainloop()
+
+
