@@ -18,21 +18,26 @@ def main_read():
 def sort_course():
     pass
 
-def sort_duedate():
-    pass
+def sort_duedate_descending():
+    task_list.sort(key=lambda x: x.duedate, reverse = True)
+    return task_list
+
+def sort_duedate_ascending():
+    task_list.sort(key=lambda x: x.duedate)
+    return task_list
 
 def sort_time_descending():
-    task_list.sort(key=lambda x: x.time)
+    task_list.sort(key=lambda x: x.time, reverse = True)
     return task_list
 
 def sort_time_ascending():
-    task_list.sort(key=lambda x: x.time, reverse = True)
+    task_list.sort(key=lambda x: x.time)
     return task_list
     
 def sort_priority_descending():
-    task_list.sort(key=lambda x: x.priority)
+    task_list.sort(key=lambda x: x.priority, reverse = True)
     return task_list
 
 def sort_priority_ascending():
-    task_list.sort(key=lambda x: x.priority, reverse = True)
+    task_list.sort(key=lambda x: x.priority)
     return task_list
