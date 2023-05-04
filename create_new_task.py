@@ -5,6 +5,11 @@ from Task_Class import Task, read_Task
 from Main_Program import task_list, main_read
 
 def open_new_task():
+    task_screen = Tk()
+    task_screen.title("Create New Task")
+    task_screen.config(bg='#90EE90')
+
+
     def create():
         error_label = Label(task_screen, text='Fill out all fields marked with *')
         error_label_2 = Label(task_screen, text='Fill out all fields correctly')
@@ -29,7 +34,7 @@ def open_new_task():
                 error_label_2.grid(row=7, column=0)
                 return
         input_time = time_entry.get()
-        tk.Label(text="Task created!").grid(row=7, column=1)
+        Label(task_screen, text="Task created!").grid(row=7, column=1)
         new_task = Task(input_course, input_title, input_due_date, input_time, input_priority)
         task_list.append(new_task)
     
@@ -52,10 +57,9 @@ def open_new_task():
                 f.write(input_priority)
             f.write("\n")
     
-    task_screen = Tk()
-    task_screen.title("Create New Task")
-    task_screen.config(bg='#90EE90')
-    task_screen.geometry("450x325")
+    
+
+    
 
     #title
     title_label = Label(task_screen, text="Title *", bg='#90EE90')
@@ -93,7 +97,6 @@ def open_new_task():
     due_date_entry = Calendar(task_screen, selectmode='day', year=2023, month=5, day=1)
     due_date_entry.grid(row=5, column=1, sticky='w')
 
-    #Button
     create_button = Button(task_screen, text="Create", command=create, bg='green', fg='white')
     create_button.grid(row=6, column=1)
 
@@ -103,24 +106,48 @@ def open_new_task():
 
 root = Tk()
 root.title('Main Menu')
-root.geometry("500x500")
+root.geometry('500x500')
 
 
 
-titlelabel = Label(root, text = "Title")
-courselabel = Label(root, text = "Course")
-prioritylabel = Label(root, text = "Priority")
-timelabel = Label(root, text = "Time")
-duelabel = Label(root, text = "Due Date")
+    
+
+
+titlelabel = Label(root, text = "Title", bg='#90EE90')
+courselabel = Label(root, text = "Course", bg='#90EE90')
+prioritylabel = Label(root, text = "Priority", bg='#90EE90')
+timelabel = Label(root, text = "Time", bg='#90EE90')
+duelabel = Label(root, text = "Due Date", bg='#90EE90')
 open_new_task_button = Button(root, text='New Task', command=open_new_task, fg='white', bg='green')
+
+task_list = main_read()
+i = len(task_list)
 
 titlelabel.grid(row = 0, column = 0)
 courselabel.grid(row = 0, column = 1)
 prioritylabel.grid(row = 0, column = 2)
 timelabel.grid(row = 0, column = 3)
 duelabel.grid(row = 0, column = 4)
-open_new_task_button.grid(row=1, column=2)
+open_new_task_button.grid(row=(1+i), column=2)
+
+
+def rearrange(task_list):
+    i = len(task_list)
+    for t in range(i):
+        task_title = Label(root, text=task_list[t].title)
+        task_course = Label(root, text=task_list[t].course)
+        task_priority = Label(root, text=task_list[t].priority)
+        task_time = Label(root, text=task_list[t].time)
+        task_duedate = Label(root, text=task_list[t].duedate)
+
+
+        task_title.grid(row=t+1, column=0)
+        task_course.grid(row=t+1, column=1)
+        task_priority.grid(row=t+1, column=2)
+        task_time.grid(row=t+1, column=3)
+        task_duedate.grid(row=t+1, column=4)
 
 
 root.after(1, main_read)
+rearrange(task_list)
 root.mainloop()
