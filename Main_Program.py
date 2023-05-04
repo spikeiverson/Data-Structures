@@ -12,7 +12,7 @@ def main_read():
                     finished = True
                 else:
                     task_list.append(new_task)
-    print(task_list)
+    return task_list
 
 
 def sort_course():
