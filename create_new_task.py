@@ -97,7 +97,7 @@ def open_new_task():
     due_date_entry = Calendar(task_screen, selectmode='day', year=2023, month=5, day=1)
     due_date_entry.grid(row=5, column=1, sticky='w')
 
-    create_button = Button(task_screen, text="Create", command=create, bg='green', fg='white')
+    create_button = Button(task_screen, text="Create", command=lambda:[create(),add_new_screen()], bg='green', fg='white')
     create_button.grid(row=6, column=1)
 
     task_screen.mainloop()
@@ -147,7 +147,21 @@ def rearrange(task_list):
         task_time.grid(row=t+1, column=3)
         task_duedate.grid(row=t+1, column=4)
 
+def add_new_screen():
+    i = len(task_list) - 1
+    task_title = Label(root, text=task_list[i].title)
+    task_course = Label(root, text=task_list[i].course)
+    task_priority = Label(root, text=task_list[i].priority)
+    task_time = Label(root, text=task_list[i].time)
+    task_duedate = Label(root, text=task_list[i].duedate)
 
+    task_title.grid(row=i+1, column=0)
+    task_course.grid(row=i+1, column=1)
+    task_priority.grid(row=i+1, column=2)
+    task_time.grid(row=i+1, column=3)
+    task_duedate.grid(row=i+1, column=4)
+    
+    
 root.after(1, main_read)
 rearrange(task_list)
 root.mainloop()
