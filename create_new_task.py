@@ -151,8 +151,14 @@ def add_new_screen():
     i = len(task_list) - 1
     task_title = Label(root, text=task_list[i].title)
     task_course = Label(root, text=task_list[i].course)
-    task_priority = Label(root, text=task_list[i].priority)
-    task_time = Label(root, text=task_list[i].time)
+    if task_list[i].priority == "":
+        task_priority = Label(root, text="~")
+    else:
+        task_priority = Label(root, text=task_list[i].priority)
+    if task_list[i].time == "":
+        task_time = Label(root, text="~")
+    else:
+        task_time = Label(root, text=task_list[i].time)
     task_duedate = Label(root, text=task_list[i].duedate)
 
     task_title.grid(row=i+1, column=0)
