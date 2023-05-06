@@ -109,29 +109,59 @@ root.title('Main Menu')
 root.geometry('500x500')
 
 
-
+def sort_method():
+    sorting = clicked.get()
+    if sorting == 'Time Ascending':
+        task_list.sort(key=lambda x: x.time, reverse = True)
+    elif sorting == 'Time Descending':
+        task_list.sort(key=lambda x: x.time)
+    elif sorting == 'Priority Ascending':
+        task_list.sort(key=lambda x: x.priority, reverse = True)
+    elif sorting == 'Priority Descending':
+        task_list.sort(key=lambda x: x.priority)
+    elif sorting == 'Due Date Ascending':
+        task_list.sort(key=lambda x: x.duedate)
+    elif sorting == 'Due Date Descending':
+        task_list.sort(key=lambda x: x.duedate, reverse=True)
+    else:
+        return
+    rearrange(task_list)
     
 
 
-titlelabel = Label(root, text = "Title", bg='#90EE90')
-courselabel = Label(root, text = "Course", bg='#90EE90')
-prioritylabel = Label(root, text = "Priority", bg='#90EE90')
-timelabel = Label(root, text = "Time", bg='#90EE90')
-duelabel = Label(root, text = "Due Date", bg='#90EE90')
-open_new_task_button = Button(root, text='New Task', command=open_new_task, fg='white', bg='green')
 
 task_list = main_read()
 i = len(task_list)
+methods = ['Due Date Ascending', 'Due Date Descending', 'Priority Ascending', 'Priority Descending', 'Time Ascending', 'Time Descending']
+clicked = StringVar()
+clicked.set('Sort by')
 
-titlelabel.grid(row = 0, column = 0)
-courselabel.grid(row = 0, column = 1)
-prioritylabel.grid(row = 0, column = 2)
-timelabel.grid(row = 0, column = 3)
-duelabel.grid(row = 0, column = 4)
-open_new_task_button.grid(row=(1+i), column=2)
+def root_labels():
+    dropdown = OptionMenu(root, clicked, *methods)
+    titlelabel = Label(root, text = "Title", bg='#90EE90')
+    courselabel = Label(root, text = "Course", bg='#90EE90')
+    prioritylabel = Label(root, text = "Priority", bg='#90EE90')
+    timelabel = Label(root, text = "Time", bg='#90EE90')
+    duelabel = Label(root, text = "Due Date", bg='#90EE90')
+    open_new_task_button = Button(root, text='New Task', command=open_new_task, fg='white', bg='green')
+    sort_button = Button(root, text='Sort', command=sort_method, fg='white', bg='#505050')
 
+
+    titlelabel.grid(row = 0, column = 0)
+    courselabel.grid(row = 0, column = 1)
+    prioritylabel.grid(row = 0, column = 2)
+    timelabel.grid(row = 0, column = 3)
+    duelabel.grid(row = 0, column = 4)
+    open_new_task_button.grid(row=6, column=5, padx=50)
+    sort_button.grid(row=2, column=5, padx=50)
+    dropdown.grid(row=1, column=5, padx=50)
 
 def rearrange(task_list):
+    for everything in root.grid_slaves():
+        everything.destroy()
+
+    root_labels()
+    
     i = len(task_list)
     for t in range(i):
         task_title = Label(root, text=task_list[t].title)
