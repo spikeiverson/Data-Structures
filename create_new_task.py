@@ -15,25 +15,35 @@ def open_new_task():
         error_label_2 = Label(task_screen, text='Fill out all fields correctly')
         input_title = title_entry.get()
         if input_title == '':
+            error_label_2.destroy()
             error_label.grid(row=7, column=0)
             return
         input_course = course_entry.get()
         if input_course == '':
+            error_label_2.destroy()
             error_label.grid(row=7, column=0)
             return
         input_due_date = due_date_entry.get_date()
         if input_due_date == '':
+            error_label_2.destroy()
             error_label.grid(row=7, column=0)
             return
         input_priority = priority_entry.get()
         if input_priority != '':
             if input_priority.isnumeric() == False:
+                error_label.destroy()
                 error_label_2.grid(row=7, column=0)
                 return
             elif int(input_priority) > 5 or int(input_priority) < 1:
+                error_label.destroy()
                 error_label_2.grid(row=7, column=0)
                 return
         input_time = time_entry.get()
+        if input_time != '':
+            if input_time.isnumeric() == False:
+                error_label.destroy()
+                error_label_2.grid(row=7, column=0)
+                return                
         Label(task_screen, text="Task created!").grid(row=7, column=1)
         new_task = Task(input_course, input_title, input_due_date, input_time, input_priority)
         task_list.append(new_task)
