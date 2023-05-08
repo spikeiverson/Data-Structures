@@ -112,13 +112,13 @@ root.geometry('500x500')
 def sort_method():
     sorting = clicked.get()
     if sorting == 'Time Ascending':
-        task_list.sort(key=lambda x: x.time, reverse = True)
-    elif sorting == 'Time Descending':
         task_list.sort(key=lambda x: x.time)
+    elif sorting == 'Time Descending':
+        task_list.sort(key=lambda x: x.time, reverse=True)
     elif sorting == 'Priority Ascending':
-        task_list.sort(key=lambda x: x.priority, reverse = True)
-    elif sorting == 'Priority Descending':
         task_list.sort(key=lambda x: x.priority)
+    elif sorting == 'Priority Descending':
+        task_list.sort(key=lambda x: x.priority, reverse=True)
     elif sorting == 'Due Date Ascending':
         task_list.sort(key=lambda x: x.duedate)
     elif sorting == 'Due Date Descending':
@@ -126,7 +126,6 @@ def sort_method():
     else:
         return
     rearrange(task_list)
-    
 
 
 
@@ -198,6 +197,5 @@ def add_new_screen():
     task_duedate.grid(row=i+1, column=4)
     
     
-root.after(1, main_read)
 rearrange(task_list)
 root.mainloop()
