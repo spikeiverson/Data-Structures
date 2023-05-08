@@ -4,16 +4,19 @@ from tkcalendar import Calendar
 from Task_Class import Task, read_Task
 from Main_Program import task_list, main_read
 
+
+#Runs the graphic screen
 def open_new_task():
     task_screen = Tk()
     task_screen.title("Create New Task")
     task_screen.config(bg='#90EE90')
 
-
+    #Runs the "Create New Task Screen"
     def create():
         error_label = Label(task_screen, text='Fill out all fields marked with *')
         error_label_2 = Label(task_screen, text='Fill out all fields correctly')
         input_title = title_entry.get()
+        #Collects User Input
         if input_title == '':
             error_label_2.destroy()
             error_label.grid(row=7, column=0)
@@ -44,10 +47,12 @@ def open_new_task():
                 error_label.destroy()
                 error_label_2.grid(row=7, column=0)
                 return                
+        #Creates Task Object and adds it to task_list
         Label(task_screen, text="Task created!").grid(row=7, column=1)
         new_task = Task(input_course, input_title, input_due_date, input_time, input_priority)
         task_list.append(new_task)
-    
+
+        #Writes the task into a text file
         filename = "TaskText"
         with open(filename, "a") as f:
             f.write(input_course)
@@ -66,8 +71,6 @@ def open_new_task():
             else:
                 f.write(input_priority)
             f.write("\n")
-    
-    
 
     
 
@@ -84,7 +87,6 @@ def open_new_task():
 
     course_entry = Entry(task_screen)
     course_entry.grid(row=2, column=1, sticky='ew')
-
 
     #priority
     priority_label = Label(task_screen, text="Priority (5-1)", bg='#90EE90')
@@ -107,18 +109,18 @@ def open_new_task():
     due_date_entry = Calendar(task_screen, selectmode='day', year=2023, month=5, day=1)
     due_date_entry.grid(row=5, column=1, sticky='w')
 
+    #button
     create_button = Button(task_screen, text="Create", command=lambda:[create(),add_new_screen()], bg='green', fg='white')
     create_button.grid(row=6, column=1)
 
     task_screen.mainloop()
 
 
-
 root = Tk()
 root.title('Main Menu')
 root.geometry('500x500')
 
-
+#Sorts tasks by given attribute and replaces them on the screen
 def sort_method():
     sorting = clicked.get()
     if sorting == 'Time Ascending':
@@ -138,13 +140,15 @@ def sort_method():
     rearrange(task_list)
 
 
-
 task_list = main_read()
 i = len(task_list)
+#Creates Dropdown sorting options
 methods = ['Due Date Ascending', 'Due Date Descending', 'Priority Ascending', 'Priority Descending', 'Time Ascending', 'Time Descending']
 clicked = StringVar()
 clicked.set('Sort by')
 
+#Creates the grid where tasks will be displayed
+#Creates the buttons for creating tasks and sorting
 def root_labels():
     dropdown = OptionMenu(root, clicked, *methods)
     titlelabel = Label(root, text = "Title", bg='#90EE90')
@@ -165,6 +169,8 @@ def root_labels():
     sort_button.grid(row=2, column=5, padx=50)
     dropdown.grid(row=1, column=5, padx=50)
 
+
+#Writes the tasks onto the screen based on the order of task_list
 def rearrange(task_list):
     for everything in root.grid_slaves():
         everything.destroy()
@@ -186,6 +192,8 @@ def rearrange(task_list):
         task_time.grid(row=t+1, column=3)
         task_duedate.grid(row=t+1, column=4)
 
+
+#Adds new tasks just created to the "root" screen: UNSORTED
 def add_new_screen():
     i = len(task_list) - 1
     task_title = Label(root, text=task_list[i].title)

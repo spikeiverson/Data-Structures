@@ -3,6 +3,7 @@ import create_new_task
 
 task_list = []
 
+#Reads the text file and creates objects to populate the text file
 def main_read():
     with open("TaskText") as f:
             finished = False
@@ -12,32 +13,4 @@ def main_read():
                     finished = True
                 else:
                     task_list.append(new_task)
-    return task_list
-
-
-def sort_course():
-    pass
-
-def sort_duedate_descending():
-    task_list.sort(key=lambda x: x.duedate, reverse = True)
-    return task_list
-
-def sort_duedate_ascending():
-    task_list.sort(key=lambda x: x.duedate)
-    return task_list
-
-def sort_time_descending():
-    task_list.sort(key=lambda x: x.time, reverse = True)
-    return task_list
-
-def sort_time_ascending():
-    task_list.sort(key=lambda x: x.time)
-    return task_list
-    
-def sort_priority_descending():
-    task_list.sort(key=lambda x: x.priority, reverse = True)
-    return task_list
-
-def sort_priority_ascending():
-    task_list.sort(key=lambda x: x.priority)
     return task_list
